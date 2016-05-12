@@ -10,3 +10,7 @@ $ npm install -g supervisor
 
 $ npm install
 ```
+
+## host configuration
+
+use

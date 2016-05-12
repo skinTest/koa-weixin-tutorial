@@ -13,21 +13,22 @@ const config = {
 const app = new Koa()
 
 app.use(function* (next) {
-    console.log(this.query)
+    console.dir(this.query)
     // get info for sha1 -> use es6 destructure assign to simplify this boilerplate
     let token = config.weixin_auth.token
     let signature = this.query.signature
     let nonce = this.query.nonce
     let timestamp = this.query.timestamp
-    let ecostr = this.query.ecostr
+    let echostr = this.query.echostr
 
     let str = [token, timestamp, nonce].sort().join('')
     let sha = sha1(str)
 
     if(sha === signature) {
-        this.body = ecostr + ''
+        this.body = echostr + ''
     } else {
-        console.log('some other requested')
+        this.body = 'it is not ok to hack me'
+        console.log('some other requested our server')
         console.dir(this.query)
     }
 
