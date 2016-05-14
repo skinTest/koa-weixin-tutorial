@@ -3,7 +3,8 @@
 const Koa = require('koa')
 const path = require('path')
 const fsp = require('./libs/fs-promisify')
-const weixinAuth = require('./wechat/weixin-auth')
+// const weixinAuth = require('./wechat/weixin-auth')
+const weixinAuth = require('./wechat/g')
 
 const wechat_file = path.join(__dirname, './config/wechat.txt')
 const config = {
@@ -15,7 +16,7 @@ const config = {
             return fsp.readFileAsync(wechat_file)
         },
         saveAccessToken: function (data) {
-            data = JSON.stringify()
+            data = JSON.stringify(data)
             console.log('data from save %s', data)
             return fsp.writeFileAsync(wechat_file, data)
         }
