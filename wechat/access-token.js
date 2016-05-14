@@ -17,7 +17,6 @@ const api = {
 
 function AccessToken (opts) {
     const that = this
-    console.dir(this)
     this.appID = opts.appID
     this.appSecret = opts.appSecret
     this.getAccessToken = opts.getAccessToken
@@ -76,6 +75,9 @@ AccessToken.prototype.updateAccessToken = function () {
         }).then(function (response) {
             let data = response[1]
             data.expires_in += new Date().getTime() - (60 * 1000)
+
+            console.log('----------------from update')
+            console.dir(data)
 
             resolve(data)
         })
