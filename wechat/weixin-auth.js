@@ -30,5 +30,6 @@ module.exports = function(opts) {
             console.log('some other requested our server')
             console.dir(this.query)
         }
+        yield next
     }
 }

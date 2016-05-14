@@ -1,6 +1,5 @@
 'use strict'
 
-//
 const Promise = require('bluebird')
 const requsest = Promise.promisify(require('request'))
 
@@ -18,6 +17,7 @@ const api = {
 
 function AccessToken (opts) {
     const that = this
+    console.dir(this)
     this.appID = opts.appID
     this.appSecret = opts.appSecret
     this.getAccessToken = opts.getAccessToken

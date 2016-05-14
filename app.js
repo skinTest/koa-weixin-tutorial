@@ -16,10 +16,11 @@ const config = {
         },
         saveAccessToken: function (data) {
             data = JSON.stringify()
-            return fsp.writeFileAsync(wechat_file)
+            return fsp.writeFileAsync(wechat_file, data)
         }
     }
 }
+
 
 const app = new Koa()
 
