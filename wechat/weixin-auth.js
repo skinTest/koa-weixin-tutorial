@@ -8,6 +8,7 @@ const sha1 = require('sha1')
 const getRawBofy = require('raw-body')
 const AccessToken = require('./access-token')
 const xmlParser = require('./libs/xml-parser')
+const flattenArray = require('./libs/flatten-array')
 
 module.exports = function(opts) {
     let accessToken = new AccessToken(opts)
@@ -52,6 +53,8 @@ module.exports = function(opts) {
 
             let content = yield xmlParser(data)
             console.dir(content)
+            let message = flattenArray(content)
+            console.dir(message)
         }
     }
 }
