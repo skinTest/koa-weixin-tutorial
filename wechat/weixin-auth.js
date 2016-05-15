@@ -7,7 +7,7 @@
 const sha1 = require('sha1')
 const getRawBofy = require('raw-body')
 const AccessToken = require('./access-token')
-const xmlParser = require('libs/xml-parser')
+const xmlParser = require('./libs/xml-parser')
 
 module.exports = function(opts) {
     let accessToken = new AccessToken(opts)
