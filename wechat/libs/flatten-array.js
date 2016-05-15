@@ -35,4 +35,4 @@ function formatMessage(result) {
     return message
 }
 
-exports.default = formatMessage
+module.exports = formatMessage
