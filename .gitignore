@@ -3,6 +3,9 @@ logs
 *.log
 npm-debug.log*
 
+# config token
+config/wechat.txt
+
 # Runtime data
 pids
 *.pid

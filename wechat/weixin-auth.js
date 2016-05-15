@@ -1,16 +1,14 @@
 'use strict'
-
 /*!
  * weixin auth
- * this middleware is used to authorize from weixin
- * the opts should have token
+ * this middleware is implemented to authorize from weixin
+ * the opts will include the wechat config
  */
-
 const sha1 = require('sha1')
 const AccessToken = require('./access-token')
 
 module.exports = function(opts) {
-    const accessToken = new AccessToken(opts)
+    let accessToken = new AccessToken(opts)
     return function* (next) {
         console.dir(this.query)
         // get info for sha1 -> use es6 destructure assign to simplify this boilerplate
