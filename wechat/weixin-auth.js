@@ -11,7 +11,7 @@ const xmlParser = require('./libs/xml-parser')
 const flattenArray = require('./libs/flatten-array')
 
 module.exports = function(opts) {
-    let accessToken = new AccessToken(opts)
+    // let accessToken = new AccessToken(opts)
     return function* (next) {
         console.dir(this.query)
         // get info for sha1 -> use es6 destructure assign to simplify this boilerplate
