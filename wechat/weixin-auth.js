@@ -7,6 +7,7 @@
 const sha1 = require('sha1')
 const getRawBofy = require('raw-body')
 const AccessToken = require('./access-token')
+const xmlParser = require('libs/xml-parser')
 
 module.exports = function(opts) {
     let accessToken = new AccessToken(opts)
@@ -49,7 +50,8 @@ module.exports = function(opts) {
                 encoding: this.charset
             })
 
-            console.log(data.toString())
+            let content = yield xmlParser(data)
+            console.dir(content)
         }
     }
 }
