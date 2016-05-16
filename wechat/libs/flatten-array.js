@@ -1,38 +1,54 @@
 'use strict'
 
-function formatMessage(result) {
-    let message = {}
+function formatMessage(content) {
+    let result = {}
 
-    if (typeof result === 'object') {
-        let keys = Object.keys(result)
+    // if (typeof content === 'object' && !(Array.isArray(content))) {
+    if (typeof content === 'object' && !(Array.isArray(content))) {
+        let keys = Object.keys(content)
+        // console.log('---------------------------iterate keys')
+        // console.dir(keys)
 
         for (let i = 0; i < keys.length; i++) {
-            let item = result[keys[i]]
+            let item = content[keys[i]]
             let key = keys[i]
+            // console.log('-------------i iteration for key:       %s', key)
+            // console.dir(item)
 
-            if (!(item instanceof Array) || item.length === 0) {
+            if (typeof item === 'object' && !(Array.isArray(item))) {
+                result[key] = formatMessage(item)
+                // console.log("typeof item === 'object' && !(Array.isArray(item))")
+            } else if (!Array.isArray(item) || item.length === 0) {
+                // console.log("!Array.isArray(item) || item.length === 0")
                 continue
-            }
-            if (item.length === 1) {
+            } else if (item.length === 1) {
+                // console.log("length === 1")
                 let val = item[0]
-
+                // console.log('------------------type judgement')
+                console.log(typeof val)
                 if (typeof val === 'object') {
-                    message[key] = formatMessage(val)
+                   result[key] = formatMessage(val)
+                } else {
+                    // console.log('key else called')
+                   result[key] = (val || '').trim()
+                   // console.log(result)
                 }
-                else {
-                    message[key] = (val || '').trim()
-                }
-            }
-            else {
-                message[key] = []
+            } else {
+                console.log("an array is been iterated again")
+                result[key] = []
                 for (let j = 0; j < item.length; j++) {
-                    message[key].push(formatMessage(item[j]))
+                    result[key].push(formatMessage(item[j]))
                 }
             }
-        }
+        } // end of keys iteration
+
+    } // end of object management
+
+    else {
+        return content
     }
 
-    return message
+    return result
 }
 
 module.exports = formatMessage
