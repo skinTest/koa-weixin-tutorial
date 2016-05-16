@@ -13,6 +13,7 @@ const flattenArray = require('./libs/flatten-array')
 module.exports = function(opts) {
     let accessToken = new AccessToken(opts)
     return function* (next) {
+        let that = this
         console.dir(this.query)
         // get info for sha1 -> use es6 destructure assign to simplify this boilerplate
         let signature = this.query.signature
@@ -60,9 +61,9 @@ module.exports = function(opts) {
                 if (message.Event === 'subscribe') {
                     let now = new Date().getTime()
 
-                    this.status = 200
-                    this.type = 'application/xml'
-                    this.body = '<xml>' +
+                    that.status = 200
+                    that.type = 'application/xml'
+                    that.body = '<xml>' +
                                 '<ToUserName><![CDATA[' + message.FromUserName + ']]></ToUserName>' +
                                 '<FromUserName><![CDATA[' + message.ToUserName + ']]></FromUserName>' +
                                 '<CreateTime>' + now + '</CreateTime>' +
