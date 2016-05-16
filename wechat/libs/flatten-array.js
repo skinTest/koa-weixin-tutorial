@@ -25,7 +25,7 @@ function formatMessage(content) {
                 // console.log("length === 1")
                 let val = item[0]
                 // console.log('------------------type judgement')
-                console.log(typeof val)
+                // console.log(typeof val)
                 if (typeof val === 'object') {
                    result[key] = formatMessage(val)
                 } else {
