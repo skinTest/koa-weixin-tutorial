@@ -54,13 +54,14 @@ module.exports = function(opts) {
 
             let content = yield xmlParser(data)
             let message = flattenArray(content)
+            message = message.xml
             console.dir(message)
 
             // process incoming post message with different situation
             if (message.MsgType === 'event') {
                 if (message.Event === 'subscribe') {
                     let now = new Date().getTime()
-
+                    console.log('---------------------------reply called')
                     that.status = 200
                     that.type = 'application/xml'
                     that.body = '<xml>' +
