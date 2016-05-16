@@ -11,7 +11,7 @@ const xmlParser = require('./libs/xml-parser')
 const flattenArray = require('./libs/flatten-array')
 
 module.exports = function(opts) {
-    // let accessToken = new AccessToken(opts)
+    let accessToken = new AccessToken(opts)
     return function* (next) {
         console.dir(this.query)
         // get info for sha1 -> use es6 destructure assign to simplify this boilerplate
@@ -52,9 +52,26 @@ module.exports = function(opts) {
             })
 
             let content = yield xmlParser(data)
-            console.dir(content)
             let message = flattenArray(content)
             console.dir(message)
+
+            // process incoming post message with different situation
+            if (message.msgType === 'event') {
+                if (message.Event === 'subscribe') {
+                    let now = new Date().getTime()
+
+                    that.status = 200
+                    that.type = 'application/xml'
+                    that.body = '<xml>' +
+                                '<ToUserName><![CDATA[' + message.FromUserName + ']]></ToUserName>' +
+                                '<FromUserName><![CDATA[' + message.ToUserName + ']]></FromUserName>' +
+                                '<CreateTime>' + now + '</CreateTime>' +
+                                '<MsgType><![CDATA[text]]></MsgType>' +
+                                '<Content><![CDATA[你好]]></Content>' +
+                                '</xml>'
+                    return
+                }
+            }
         }
     }
 }
