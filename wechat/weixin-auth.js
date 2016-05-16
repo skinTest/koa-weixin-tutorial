@@ -56,13 +56,13 @@ module.exports = function(opts) {
             console.dir(message)
 
             // process incoming post message with different situation
-            if (message.msgType === 'event') {
+            if (message.MsgType === 'event') {
                 if (message.Event === 'subscribe') {
                     let now = new Date().getTime()
 
-                    that.status = 200
-                    that.type = 'application/xml'
-                    that.body = '<xml>' +
+                    this.status = 200
+                    this.type = 'application/xml'
+                    this.body = '<xml>' +
                                 '<ToUserName><![CDATA[' + message.FromUserName + ']]></ToUserName>' +
                                 '<FromUserName><![CDATA[' + message.ToUserName + ']]></FromUserName>' +
                                 '<CreateTime>' + now + '</CreateTime>' +
